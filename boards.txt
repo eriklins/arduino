@@ -714,3 +714,65 @@ lyra24p20.menu.protocol_stack.ble_silabs.build.ld_libs=-lstdc++ -lgcc -lc -lm -l
 lyra24p20.menu.protocol_stack.none.build.ldscript={build.variant.path}/noradio/linkerfile.ld
 lyra24p20.menu.protocol_stack.ble_arduino.build.ldscript={build.variant.path}/ble_arduino/linkerfile.ld
 lyra24p20.menu.protocol_stack.ble_silabs.build.ldscript={build.variant.path}/ble_silabs/linkerfile.ld
+
+
+##################################
+# Ezurio Lyra P 20dBm Dev Kit
+# OPN: brd4330a
+##################################
+
+lyrap.name=Ezurio Lyra P Dev Kit
+lyrap.menu.protocol_stack.ble_silabs=BLE (Silabs)
+lyrap.menu.protocol_stack.none=None
+lyrap.upload.tool=simplicitycommander
+lyrap.upload.tool.default=simplicitycommander
+lyrap.upload.target=bgm220explorerkit
+lyrap.upload.maximum_data_size=32768
+lyrap.upload.maximum_size=524288
+lyrap.upload.protocol=jlink
+lyrap.upload.setup_command=
+lyrap.upload.use_1200bps_touch=false
+lyrap.upload.wait_for_upload_port=false
+lyrap.upload.native_usb=false
+lyrap.bootloader.tool=simplicitycommander
+lyrap.bootloader.tool.default=simplicitycommander
+lyrap.bootloader.file=lyrap-bootloader-storage-internal-single-512k.hex
+lyrap.build.mcu=cortex-m33
+lyrap.build.f_cpu=78000000
+lyrap.build.board=EZURIO_LYRAP
+lyrap.build.core=silabs
+lyrap.build.variant=lyrap
+lyrap.build.variant_system_lib=
+lyrap.debug.server=jlink
+
+lyrap.build.gsdk_path=
+lyrap.menu.protocol_stack.ble_silabs.build.precompiled_gsdk="{build.variant.path}/ble_silabs/gsdk.a"
+lyrap.menu.protocol_stack.none.build.precompiled_gsdk="{build.variant.path}/noradio/gsdk.a"
+
+lyrap.menu.protocol_stack.ble_silabs.build.include_list="-I{build.variant.path}" "-I{build.variant.path}/ble_silabs/include"
+lyrap.menu.protocol_stack.none.build.include_list="-I{build.variant.path}" "-I{build.variant.path}/noradio/include"
+
+lyrap.menu.protocol_stack.ble_silabs.build.precompiled_libs="{build.variant.path}/ble_silabs/libbgcommon_efr32xg22_gcc_release.a" "{build.variant.path}/ble_silabs/libbluetooth_controller_efr32xg22_gcc_release.a" "{build.variant.path}/ble_silabs/libbluetooth_host_efr32xg22_gcc_release.a" "{build.variant.path}/ble_silabs/libnvm3_CM33_gcc.a" "{build.variant.path}/ble_silabs/librail_config_bgm220pc22hna_gcc.a" "{build.variant.path}/ble_silabs/librail_module_efr32xg22_gcc_release.a"
+
+lyrap.menu.protocol_stack.none.build.precompiled_libs="{build.variant.path}/noradio/libnvm3_CM33_gcc.a"
+
+lyrap.build.board_specific_macros='-DNUM_LEDS=1' '-DNUM_BTN=1' '-DNUM_HW_SERIAL=2' '-DNUM_HW_SPI=1' '-DNUM_HW_I2C=1' '-DARDUINO_MAIN_TASK_STACK_SIZE=256'
+
+lyrap.menu.protocol_stack.ble_silabs.build.extra_flags={build.board_specific_macros} '-DBGM220PC22HNA=1' '-DSL_APP_PROPERTIES=1' '-DHARDWARE_BOARD_DEFAULT_RF_BAND_2400=1' '-DHARDWARE_BOARD_SUPPORTS_1_RF_BAND=1' '-DHARDWARE_BOARD_SUPPORTS_RF_BAND_2400=1' '-DSL_BOARD_NAME="BRD4314A"' '-DSL_BOARD_REV="A02"' '-DconfigNUM_SDK_THREAD_LOCAL_STORAGE_POINTERS=2' '-DSL_COMPONENT_CATALOG_PRESENT=1' '-DMBEDTLS_CONFIG_FILE=<sl_mbedtls_config.h>' '-DMBEDTLS_PSA_CRYPTO_CONFIG_FILE=<psa_crypto_config.h>' '-DSL_RAIL_LIB_MULTIPROTOCOL_SUPPORT=0' '-DSL_RAIL_UTIL_PA_CONFIG_HEADER=<sl_rail_util_pa_config.h>' '-DSLI_RADIOAES_REQUIRES_MASKING=1'
+
+lyrap.menu.protocol_stack.none.build.extra_flags={build.board_specific_macros} '-DBGM220PC22HNA=1' '-DSL_APP_PROPERTIES=1' '-DHARDWARE_BOARD_DEFAULT_RF_BAND_2400=1' '-DHARDWARE_BOARD_SUPPORTS_1_RF_BAND=1' '-DHARDWARE_BOARD_SUPPORTS_RF_BAND_2400=1' '-DSL_BOARD_NAME="BRD4314A"' '-DSL_BOARD_REV="A02"' '-DconfigNUM_SDK_THREAD_LOCAL_STORAGE_POINTERS=2' '-DSL_COMPONENT_CATALOG_PRESENT=1' '-DMBEDTLS_CONFIG_FILE=<sl_mbedtls_config.h>' '-DMBEDTLS_PSA_CRYPTO_CONFIG_FILE=<psa_crypto_config.h>'
+
+lyrap.build.float_flags=
+
+lyrap.build.s_flags=-mcpu={build.mcu} -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=hard -imacros sl_gcc_preinclude.h -x assembler-with-cpp -c -g
+
+lyrap.build.c_flags=-mcpu={build.mcu} -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c -g {compiler.warning_flags} {build.float_flags} -std=c99 -Wall -Wextra -fdata-sections -ffunction-sections -fomit-frame-pointer -imacros sl_gcc_preinclude.h -mcmse --specs=nano.specs -g
+
+lyrap.build.cpp_flags=-mcpu={build.mcu} -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c -g {compiler.warning_flags} {build.float_flags} -std=c++11 -Wall -Wextra -fdata-sections -ffunction-sections -fomit-frame-pointer -imacros sl_gcc_preinclude.h -mcmse --specs=nano.specs -g
+
+lyrap.build.ld_flags=-mcpu={build.mcu} -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=hard --specs=nano.specs -Xlinker -Map {compiler.mapfile_path} -Wl,--gc-sections
+
+lyrap.build.ld_libs=-lstdc++ -lgcc -lc -lm -lnosys -lsupc++
+
+lyrap.menu.protocol_stack.ble_silabs.build.ldscript={build.variant.path}/ble_silabs/linkerfile.ld
+lyrap.menu.protocol_stack.none.build.ldscript={build.variant.path}/noradio/linkerfile.ld
